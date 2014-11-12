@@ -29,10 +29,10 @@ Si on est sur la Master on ira sur la branche test
 Enregistrer sur le github : (commit toujours avant de push)
 ==============
 
-git add .
-git commit -am "entrer le commentaire du pourquoi je fais ça"
-git pull
-git push origin test
+/n git add .
+/n git commit -am "entrer le commentaire du pourquoi je fais ça"
+/n git pull
+/n git push origin test
 
 Ceci sont les commandes complètes pour enregistrer sur la branche test.
 
