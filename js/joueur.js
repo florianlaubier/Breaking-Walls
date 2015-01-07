@@ -109,7 +109,7 @@ function initJoueur () {
 
     window.addEventListener("keydown", function (e)
     {
-        //console.log(e.which);
+        console.log(e.which);
 
         if(e.which == 32) // espace
         {
