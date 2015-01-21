@@ -1,4 +1,5 @@
-var MUR_MODEL;
+var FACADE_MODEL;
+var SOL_MODEL;
 
 function initDecor()
 {
@@ -9,34 +10,61 @@ function initDecor()
 function Decor()
 {
     // Création du sol
-    var ground = BABYLON.Mesh.CreateGround("ground1", 100, 20, 2, scene);
+    // var ground = BABYLON.Mesh.CreateGround("ground1", 100, 20, 2, scene);
     var murs = [];
+    var sols = [];
 
-    BABYLON.SceneLoader.ImportMesh("", "textures/", "face.babylon", scene, function (meshes)
+    BABYLON.SceneLoader.ImportMesh("", "textures/", "sol.babylon", scene, function (meshes)
     {
-       var m = meshes[0];
+        var m = meshes[0];
         // set the position of the model
-        m.position = new BABYLON.Vector3(-16.5,7,11);
-        m.rotate(BABYLON.Axis.Z, 3.14, BABYLON.Space.WORLD);
-        m.rotate(BABYLON.Axis.Y, -1.57, BABYLON.Space.WORLD);
+        m.position = new BABYLON.Vector3(0,7,11);
+        //m.rotate(BABYLON.Axis.Z, 3.14, BABYLON.Space.WORLD);
+        m.rotate(BABYLON.Axis.Y, 3.14, BABYLON.Space.WORLD);
         // set the scale of the model
+        m.isVisible = false;
         m.scaling = new BABYLON.Vector3(0.12, 0.12, 0.12);
-        //m.isVisible = false;
-        // set relative referential, the model
-        MUR_MODEL = m;
-        murs.push(m);
+        SOL_MODEL = m;
 
-        //AddMur(MUR_MODEL, 16.5, 3);
+        AddSol(SOL_MODEL, 50, 3);
+
     });
 
-    function AddMur(model, taille, NbMur)
+    BABYLON.SceneLoader.ImportMesh("", "textures/", "facade.babylon", scene, function (meshes)
+    {
+        var m = meshes[0];
+        // set the position of the model
+        m.position = new BABYLON.Vector3(0,7,11);
+        //m.rotate(BABYLON.Axis.Z, 3.14, BABYLON.Space.WORLD);
+        m.rotate(BABYLON.Axis.Y, 3.14, BABYLON.Space.WORLD);
+        // set the scale of the model
+        m.scaling = new BABYLON.Vector3(0.12, 0.12, 0.12);
+        m.isVisible = false;
+        // set relative referential, the model
+        FACADE_MODEL = m;
+
+        AddFacade(FACADE_MODEL, 36, 4);
+    });
+
+    function AddFacade(model, taille, NbMur)
     {
         for(var i=0;i<NbMur;i++)
         {
-            var mur = model.clone(model.name);
-            mur.position = new BABYLON.Vector3((taille*i),7,11);
-            mur.isVisible = true;
-            murs.push(mur);
+            var face = model.clone(model.name);
+            face.position = new BABYLON.Vector3((taille*i),7,11);
+            face.isVisible = true;
+            murs.push(face);
+        }
+    }
+
+    function AddSol(model, taille, NbMur)
+    {
+        for(var i=0;i<NbMur;i++)
+        {
+            var sol = model.clone(model.name);
+            sol.position = new BABYLON.Vector3((taille*i),7,11);
+            sol.isVisible = true;
+            sols.push(sol);
         }
     }
 
@@ -55,18 +83,20 @@ function Decor()
     // give the texture mode
     skyboxtexture.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
 
-    // Déplacement du mur et du ground
+    //Déplacement du mur et du ground
     scene.registerBeforeRender(function () {
-    ground.position.x -= speed;
-    if (ground.position.x < -15)
-        ground.position.x = 15;
+        for (var i in sols) {
+          sols[i].position.x -= speed;
+          if (sols[i].position.x < -25)
+              sols[i].position.x = 100;
+        }
     });
 
     scene.registerBeforeRender(function () {
     for (var i in murs) {
         murs[i].position.x -= speed;
-        if (murs[i].position.x < -34)
-            murs[i].position.x = 33;
+        if (murs[i].position.x < -36)
+            murs[i].position.x = 72;
         }
     });
 

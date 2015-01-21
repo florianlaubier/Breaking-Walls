@@ -2,6 +2,7 @@ $(document).ready(function()
 {
     var pause = false;
     //$("#Jeu").hide();
+    //engine.stopRenderLoop();
     $("#Menu").hide();
 
     $(document).on('click', "#Jouer", function()
