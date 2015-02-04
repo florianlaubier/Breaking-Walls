@@ -53,7 +53,7 @@ function Collision(objet)
     setInterval(function(){
         if (objet.intersectsMesh(hitbox, false)) {
             objet.dispose();
-            coeurDegat();
+            //coeurDegat();
         }
     }, 100);
 
