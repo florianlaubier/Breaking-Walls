@@ -16,60 +16,56 @@ function getRandomInt(min, max)
     return value;
 }
 
+var spawnSpeed = 3000;
+
 function IA()
 {
-    // var i = 3000;
+        function SpawnObstacle(){
+            var result = getRandomInt(1, 3);
 
-    // while (i >= 500)
-    // {
-    //     setInterval(function(){ i = i - 10; }, 2000);
-    // }
-
-    // setInterval(function(){
-    //     var result = getRandomInt(1, 3);
-
-    //     if (result == 1)
-    //     {
-    //         Obstacle(speed);
-    //     }
-    //     else if (result == 2)
-    //     {
-    //        Caisse(speed);
-    //     }
-    //     else if (result == 3)
-    //     {
-    //        Caisse2(speed);
-    //     }
-    // }, i);
-
-    setInterval(function(){
-        var result = getRandomInt(1, 3);
-
-        if (result == 1)
-        {
-            Boite(speed);
+            if(!pause)
+            {
+                if (result == 1)
+                {
+                    Boite(speed);
+                }
+                else if (result == 2)
+                {
+                   Bouche(speed);
+                }
+                else if (result == 3)
+                {
+                   Mur(speed);
+                }
+                if(spawnSpeed > 500){
+                    spawnSpeed = spawnSpeed - 100;
+                    speed += 0.01;
+                    console.log(spawnSpeed);
+                }
+                setTimeout(SpawnObstacle,spawnSpeed);
+            }
         }
-        else if (result == 2)
-        {
-           Bouche(speed);
-        }
-        else if (result == 3)
-        {
-           Mur(speed);
-        }
-    }, 500);
+        setTimeout(SpawnObstacle, spawnSpeed);
 }
 
 function Collision(objet)
 {
     setInterval(function(){
         if (objet.intersectsMesh(hitbox, false)) {
-            objet.material.emissiveColor = new BABYLON.Color3(1, 0, 0);
             objet.dispose();
+            coeurDegat();
         }
-    }, 10);
+    }, 100);
 
 }
+
+    function coeurDegat(){
+        var coeur1 = $('#coeur1').attr('name').text();
+        var coeur2 = $('#coeur2').attr('name').text();
+        var coeur3 = $('#coeur3').attr('name').text();
+
+        console.log($('#coeur1').attr('name') + coeur2 + coeur3);
+    }
 
 function Obstacle() // mur
 {
@@ -112,57 +108,22 @@ function Obstacle() // mur
 
 }
 
-// function Obstacle() // mur
-// {
-//     // Création box
-//     var box = BABYLON.Mesh.CreateBox("box", 1.0, scene);
-//     box.position.y = 3.1;
-//     box.position.x = 15;
-//     box.scaling.y = 7;
-//     box.material = new BABYLON.StandardMaterial("matbox", scene);
-//     box.material.emissiveColor = new BABYLON.Color3(0, 0, 1);
-
-//     scene.registerBeforeRender(function () {
-//         box.position.x -= speed;
-//         if (box.position.x < -15)
-//             box.isVisible = false;
-//             //box.position.x = 15;
-//         //Collision(box);
-
-//     });
-// }
-
-
-function Bouche()
-{
-    BABYLON.SceneLoader.ImportMesh("", "textures/obs/", "bouche.babylon", scene, function (meshes)
-    {
-       var m = meshes[0];
-        // set the position of the model
-        m.position = new BABYLON.Vector3(0,1,0);
-        //m.rotate(BABYLON.Axis.Z, 3.14, BABYLON.Space.WORLD);
-        m.rotate(BABYLON.Axis.Y, -1.57,  BABYLON.Space.WORLD);
-        // set the scale of the model
-        m.scaling = new BABYLON.Vector3(0.12, 0.12, 0.12);
-        BOUCHE_MODEL = m;
-    });
-
-}
 
 function Boite() // caisse en l'air
 {
     // Création box
     var caisse = BOITE_MODEL.clone(BOITE_MODEL.name);
-
     caisse.position.x = 15;
+    caisse.position.z = -2.1;
+    caisse.position.y = -0.5;
+
     scene.registerBeforeRender(function () {
         caisse.position.x -= speed;
         if (caisse.position.x < -15)
-            caisse.isVisible = false;
-            //caisse.position.x = 15;
-
-        //Collision(caisse);
+            caisse.dispose();
     });
+
+    Collision(caisse);
 }
 
 function Bouche() // caisse au sol
@@ -170,83 +131,31 @@ function Bouche() // caisse au sol
     // Création box
     var caisse = BOUCHE_MODEL.clone(BOUCHE_MODEL.name);
     caisse.position.x = 15;
+    caisse.position.z = -7.8;
+    caisse.position.y = -0.15;
 
     scene.registerBeforeRender(function () {
         caisse.position.x -= speed;
         if (caisse.position.x < -15)
-            caisse.isVisible = false;
-            //caisse.position.x = 15;
-
-        //Collision(caisse);
+            caisse.dispose();
     });
+
+    Collision(caisse);
 }
 
 function Mur() // mur
 {
     // Création box
     var caisse = MUR_MODEL.clone(MUR_MODEL.name);
-    caisse.position.x = 15;
+    caisse.position.x = 20;
+    caisse.position.z = 1.8;
+    caisse.position.y = -0.15;
 
     scene.registerBeforeRender(function () {
         caisse.position.x -= speed;
         if (caisse.position.x < -15)
-            caisse.isVisible = false;
-            //caisse.position.x = 15;
-
-        //Collision(caisse);
-    });
-}
-
-function VraiMur()
-{
-    BABYLON.SceneLoader.ImportMesh("", "textures/obs/", "mur.babylon", scene, function (meshes)
-    {
-       var m = meshes[0];
-        // set the position of the model
-        m.position = new BABYLON.Vector3(5,1,0);
-        //m.rotate(BABYLON.Axis.Z, 3.14, BABYLON.Space.WORLD);
-        m.rotate(BABYLON.Axis.Y, -1.57, BABYLON.Space.WORLD);
-        // set the scale of the model
-        m.scaling = new BABYLON.Vector3(0.12, 0.12, 0.12);
-        BOUCHE_MODEL = m;
+            caisse.dispose();
     });
 
-}
-
-function Caisse() // caisse en l'air
-{
-    // Création box
-    var caisse = BABYLON.Mesh.CreateBox("caisse", 0.5, scene);
-    caisse.position.y = 5;
-    caisse.position.x = 15;
-    caisse.material = new BABYLON.StandardMaterial("matbox", scene);
-    caisse.material.emissiveColor = new BABYLON.Color3(0, 0, 1);
-
-    scene.registerBeforeRender(function () {
-        caisse.position.x -= speed;
-        if (caisse.position.x < -15)
-            caisse.isVisible = false;
-            //caisse.position.x = 15;
-
-        //Collision(caisse);
-    });
-}
-
-function Caisse2() // caisse au sol
-{
-    // Création box
-    var caisse = BABYLON.Mesh.CreateBox("caisse", 0.5, scene);
-    caisse.position.y = 0;
-    caisse.position.x = 15;
-    caisse.material = new BABYLON.StandardMaterial("matbox", scene);
-    caisse.material.emissiveColor = new BABYLON.Color3(0, 0, 1);
-
-    scene.registerBeforeRender(function () {
-        caisse.position.x -= speed;
-        if (caisse.position.x < -15)
-            caisse.isVisible = false;
-            //caisse.position.x = 15;
-
-        //Collision(caisse);
-    });
+    Collision(caisse);
 }

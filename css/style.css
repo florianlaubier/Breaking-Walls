@@ -4,6 +4,7 @@ html, body {
    height: 100%;
    margin: 0;
    padding: 0;
+   background: url('../img/back.png') center top;
 }
 
 #renderCanvas {
@@ -29,6 +30,18 @@ z-index: 0;
     z-index: 1;
 }
 
+#Vie{
+    position: absolute;
+    top: 10px;
+    width:100%;
+    text-align: center;
+    z-index: 1;
+}
+
+#Vie img{
+  height: 45px;
+}
+
 #Menu{
     position : absolute;
     margin: 2%;
@@ -37,3 +50,36 @@ z-index: 0;
     z-index: 1;
 }
 
+#MenuPause{
+    position : absolute;
+    width: 100%;
+    height:100%;
+    z-index: 1;
+
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-items : center;
+}
+
+.decompte{
+  position:absolute;
+  width:40%;
+  height:300px;
+  margin-top: -150px;
+  font-size: 300;
+  text-align: center;
+  top: 50%;
+  left: 30%;
+}
+
+#changeMoi{
+  height:300px;
+  padding-top: 150px;
+}
+
+.minus{
+  font-size: 10;
+}
