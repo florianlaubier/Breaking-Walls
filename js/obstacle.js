@@ -38,7 +38,10 @@ function IA()
                    Mur(speed);
                 }
                 if(spawnSpeed > 500){
-                    spawnSpeed = spawnSpeed - 100;
+                    spawnSpeed = spawnSpeed - 10;
+                    //console.log(spawnSpeed);
+                }
+                if(spawnSpeed < 0.8){
                     speed += 0.01;
                     //console.log(spawnSpeed);
                 }
