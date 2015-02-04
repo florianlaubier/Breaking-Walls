@@ -30,7 +30,7 @@ var createScene = function () {
     // var camera = new BABYLON.FreeCamera("FreeCamera", new BABYLON.Vector3(0, 1, -15), scene);
 
     // Attache la caméra au canvas
-    // camera.attachControl(canvas, true);
+     camera.attachControl(canvas, true);
     // camera.target = player;
 
     // création de la lumière

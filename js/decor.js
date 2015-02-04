@@ -79,7 +79,7 @@ function Decor()
     // remove light effect and create a white light
     skyboxtexture.diffuseColor = new BABYLON.Color3(0, 0, 0);
     // give textures for the cube
-    skyboxtexture.reflectionTexture = new BABYLON.CubeTexture("textures/skybox2/skybox", scene);
+    skyboxtexture.reflectionTexture = new BABYLON.CubeTexture("textures/skybox/skybox", scene);
     // give the texture mode
     skyboxtexture.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
 

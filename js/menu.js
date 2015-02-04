@@ -1,5 +1,6 @@
 var pause;
 var menuPause;
+
 $(document).ready(function()
 {
     // mode normal avec le menu
@@ -9,6 +10,7 @@ $(document).ready(function()
     $("#Menu").show();
     $("#MenuPause").hide();
     $(".decompte").hide();
+
 
     // pause = true;
     // menuPause = true;
