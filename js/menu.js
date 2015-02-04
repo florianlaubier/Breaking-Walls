@@ -37,7 +37,7 @@ $(document).ready(function()
 
     window.addEventListener("keydown", function (e)
     {
-        console.log(e.which);
+        //console.log(e.which);
 
         if(e.which == 80 && !pause) // P depuis le jeu, on passe en pause
         {

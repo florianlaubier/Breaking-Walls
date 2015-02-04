@@ -40,7 +40,7 @@ function IA()
                 if(spawnSpeed > 500){
                     spawnSpeed = spawnSpeed - 100;
                     speed += 0.01;
-                    console.log(spawnSpeed);
+                    //console.log(spawnSpeed);
                 }
                 setTimeout(SpawnObstacle,spawnSpeed);
             }
@@ -60,11 +60,11 @@ function Collision(objet)
 }
 
     function coeurDegat(){
-        var coeur1 = $('#coeur1').attr('name').text();
-        var coeur2 = $('#coeur2').attr('name').text();
-        var coeur3 = $('#coeur3').attr('name').text();
+        var coeur1 = $('#coeur1').attr("name");
+        var coeur2 = $('#coeur2').attr("name");
+        var coeur3 = $('#coeur3').attr("name");
 
-        console.log($('#coeur1').attr('name') + coeur2 + coeur3);
+        console.log(coeur1);
     }
 
 function Obstacle() // mur
