@@ -156,15 +156,24 @@ function initJoueur () {
         }
     }
 
+     function Poing (perso)
+    {
+       // CODER ANIM POING
+    }
+
     window.addEventListener("keydown", function (e)
     {
-        if(e.which == 32) // espace
-        {
+        if(e.which == 32 || e.which ==  90 || e.which ==  122) // espace + Z + z
+        { 
             Jump(player);
         }
-        else if(e.which == 68 || e.which == 100) // D
+        else if(e.which == 68 || e.which == 100) // D + d
         {
-            Kick(player);
+            //Poing(player);
+        }
+        else if(e.which == 68 || e.which == 100) // S + s
+        {
+            //Kick(player);
         }
     });
 
@@ -177,12 +186,4 @@ function initJoueur () {
         }
     });
 
-
-    // window.addEventListener("keypress", function (e)
-    // {
-    //     if(e.which == 68 || e.which == 100) // D
-    //     {
-    //         Kick(player);
-    //     }
-    // });
 }

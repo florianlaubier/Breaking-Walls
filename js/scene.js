@@ -24,13 +24,13 @@ var createScene = function () {
 
     // ArcRotateCamera >> Camera turning around a 3D point (here Vector zero) with mouse and cursor keys
     // Parameters : name, alpha, beta, radius, target, scene
-    var camera = new BABYLON.ArcRotateCamera("ArcRotateCamera", -5.2, 1.5, -2, new BABYLON.Vector3(-2, 4, -13), scene);
+     var camera = new BABYLON.ArcRotateCamera("ArcRotateCamera", -5.2, 1.5, -2, new BABYLON.Vector3(-2, 4, -13), scene);
 
     // caméra de debug
     // var camera = new BABYLON.FreeCamera("FreeCamera", new BABYLON.Vector3(0, 1, -15), scene);
 
     // Attache la caméra au canvas
-     camera.attachControl(canvas, true);
+    // camera.attachControl(canvas, true);
     // camera.target = player;
 
     // création de la lumière
@@ -46,6 +46,9 @@ var createScene = function () {
 
     //Appel des obstacles
     initObstacle();
+
+    //DebugLater
+    scene.debugLayer.show();
 
     // Leave this function
     return scene;
